@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+
+
+contract QTKN is ERC20 {
+
+    uint256 public _totalSupply = 10000;
+
+    mapping(address => bool) registeredStudents ;
+
+   
+    constructor() ERC20("ERC20", "QTKN") {}
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+
+    function buyTokens() public payable {
+        require(msg.value >= 1 ether);
+        require(_totalSupply >= 100);
+        _mint(msg.sender, 100);
+        _totalSupply - 100;
+    }
+
+    function registration() public payable {
+        require(msg.value >= 100);
+        require(registeredStudents[msg.sender] , 'You Are Already Registered');
+        registeredStudents[msg.sender] = true;
+
+
+    }
+
+
+}

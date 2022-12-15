@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+
+
+contract School is Ownable  {
+
+    uint256 counter =0; 
+
+struct Course{
+    string name;
+    address teacher;
+    string classType;
+}
+
+    mapping(uint256 => Course) courses ;
+
+
+
+
+
+function createCourse(string memory courseName,address teacher, string memory classType) public onlyOwner {
+
+    
+    courses[counter] = Course{
+    name : courseName,
+    teacher : teacher,
+    classType : classType
+
+    };
+
+    counter +=1 ;
+}
+
+}
